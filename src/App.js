@@ -1,12 +1,13 @@
 import "./App.css";
-
+import Header from "./Header";
 function App() {
   return (
     <div className="App">
-      <h1>Let build nanum app</h1>
-      {/* Header */}
+      <Header />
       {/* Nanum Cards */}
-      {/* Footer */}
+      {/* Buttons below nanum cards */}
+      {/* Chat screen */}
+      {/* Individual chat screen */}
     </div>
   );
 }
