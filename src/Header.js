@@ -5,7 +5,7 @@ import ForumIcon from "@material-ui/icons/Forum";
 import IconButton from "@material-ui/core/IconButton";
 import logo from "./img/nanum-logo.png";
 
-function Header() {
+const Header = () => {
   return (
     <div className="header">
       <IconButton>
@@ -18,6 +18,6 @@ function Header() {
       </IconButton>
     </div>
   );
-}
+};
 
 export default Header;

@@ -1,15 +1,12 @@
-import "./App.css";
 import Header from "./Header";
-function App() {
+import RootRouter from "./route/RootRouter";
+const App = () => {
   return (
-    <div className="App">
+    <>
       <Header />
-      {/* Nanum Cards */}
-      {/* Buttons below nanum cards */}
-      {/* Chat screen */}
-      {/* Individual chat screen */}
-    </div>
+      <RootRouter />
+    </>
   );
-}
+};
 
 export default App;
