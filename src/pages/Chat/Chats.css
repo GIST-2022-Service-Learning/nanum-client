@@ -1,0 +1,7 @@
+.chats > a {
+  text-decoration: none;
+}
+
+.chats a:visited {
+  color: unset;
+}

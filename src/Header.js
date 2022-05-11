@@ -12,10 +12,14 @@ const Header = () => {
         <PersonIcon className="header__icon" fontSize="large" />
       </IconButton>
 
-      <img className="header__logo" src={logo} alt="nanum logo" />
-      <IconButton>
-        <ForumIcon className="header__icon" fontSize="large" />
-      </IconButton>
+      <a href="/">
+        <img className="header__logo" src={logo} alt="nanum logo" />{" "}
+      </a>
+      <a href="/chat">
+        <IconButton>
+          <ForumIcon className="header__icon" fontSize="large" />
+        </IconButton>
+      </a>
     </div>
   );
 };
