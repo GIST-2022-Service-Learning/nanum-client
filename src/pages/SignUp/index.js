@@ -5,7 +5,7 @@ import "./SignUp.css";
 const SignUp = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({
-    username: "",
+    email: "",
     verificationCode: "",
     password: "",
     passwordConfirm: "",
