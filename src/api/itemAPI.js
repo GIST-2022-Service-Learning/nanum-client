@@ -9,3 +9,8 @@ export const putItem = async (itemRequest) => {
   const response = await api.post(`item`, itemRequest);
   return response.data;
 };
+
+export const createBoard = async (itemRequest) => {
+  const response = await api.post(`boards`, itemRequest);
+  return response.data;
+};

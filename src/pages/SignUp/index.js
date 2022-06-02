@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./SignUp.css";
+import { Link, useNavigate } from "react-router-dom";
+import { Container } from "./style";
+import logo from "../../img/nanum_logo.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -61,10 +62,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
+    <Container className="signup-container">
+      <img className="nanum-logo" src={logo} alt="nanum_logo" />
       <form onSubmit={handleSubmit}>
-        <div className="input-wrapper">
-          <div className="email-wrapper">
+        <div className="wrapper-in-form">
+          <div className="input-wrapper email-input">
             <input
               name="email"
               type="email"
@@ -79,7 +81,7 @@ const SignUp = () => {
               인증
             </button>
           </div>
-          <div className="verificationCode-wrapper">
+          <div className="input-wrapper verification-code-input">
             <input
               name="verificationCode"
               value={input.verificationCode}
@@ -88,7 +90,7 @@ const SignUp = () => {
             ></input>
           </div>
 
-          <div className="password-wrapper">
+          <div className="input-wrapper password-input">
             <input
               name="password"
               value={input.password}
@@ -97,7 +99,7 @@ const SignUp = () => {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="passwordConfirm-wrapper">
+          <div className="input-wrapper confirm-password-input">
             <input
               name="passwordConfirm"
               value={input.passwordConfirm}
@@ -106,12 +108,12 @@ const SignUp = () => {
               onChange={handleChange}
             ></input>
           </div>
-          <div>
+          <div className="btn-wrapper">
             <button className="signup-btn">회원가입</button>
           </div>
           <div>
             <span>
-              이미 계정이 있으신가요?<a href="/signin">로그인</a>
+              이미 계정이 있으신가요? <Link to="/signin">로그인</Link>
             </span>
           </div>
           <div>
@@ -119,7 +121,7 @@ const SignUp = () => {
           </div>
         </div>
       </form>
-    </div>
+    </Container>
   );
 };
 

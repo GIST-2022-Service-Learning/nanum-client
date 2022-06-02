@@ -1,11 +1,11 @@
-import Header from "./Header";
 import RootRouter from "./route/RootRouter";
+import "./App.css";
+
 const App = () => {
   return (
-    <>
-      <Header />
+    <div className="App">
       <RootRouter />
-    </>
+    </div>
   );
 };
 
