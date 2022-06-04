@@ -19,16 +19,7 @@ const Main = () => {
               </div>
             </TinderCard>
           ))} */}
-        <TinderCard className="swipe">
-          <div
-            style={{
-              backgroundImage: `url("https://avatars.githubusercontent.com/u/65757344?v=4")`,
-            }}
-            className="card"
-          >
-            <h3>"김건호"</h3>
-          </div>
-        </TinderCard>
+
         <TinderCard className="swipe">
           <div
             style={{
@@ -36,7 +27,17 @@ const Main = () => {
             }}
             className="card"
           >
-            <h3>"가방"</h3>
+            <h3>가방</h3>
+          </div>
+        </TinderCard>
+        <TinderCard className="swipe">
+          <div
+            style={{
+              backgroundImage: `url("https://images.christiantoday.co.kr/data/images/full/343352/2021-10.jpg?w=654")`,
+            }}
+            className="card"
+          >
+            <h3>책</h3>
           </div>
         </TinderCard>
         <TinderCard className="swipe">
@@ -46,17 +47,17 @@ const Main = () => {
             }}
             className="card"
           >
-            <h3>"가방"</h3>
+            <h3>김건호</h3>
           </div>
         </TinderCard>
         <TinderCard className="swipe">
           <div
             style={{
-              backgroundImage: `url("https://avatars.githubusercontent.com/u/65757344?v=4")`,
+              backgroundImage: `url("https://cdn.top-rider.com/news/photo/202106/61158_130059_722.jpg")`,
             }}
             className="card"
           >
-            <h3>"가방"</h3>
+            <h3>스포츠카</h3>
           </div>
         </TinderCard>
       </Container>
