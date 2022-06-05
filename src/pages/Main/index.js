@@ -2,64 +2,73 @@ import Header from "../../components/Header";
 import TinderCard from "react-tinder-card";
 import Footer from "../../components/Footer";
 import { Container } from "./style";
+import { useEffect, useState } from "react";
+import { getBoard } from "../../api/boardAPI";
+import api from "../../api/baseAPI";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { createHeart, deleteHeart } from "../../api/heartAPI";
 
 const Main = () => {
+  const [items, setItems] = useState([]);
+  const [liked, setLiked] = useState(false);
+
+  const fetch = async () => {
+    api.defaults.headers.common["Authorization"] = `${
+      document.cookie.split("=")[1]
+    }`;
+
+    const response = await getBoard();
+    setItems(response.data);
+  };
+
+  const handleLike = async (boardId) => {
+    if (!liked) {
+      const response = await createHeart(boardId);
+      console.log(response);
+      setLiked(true);
+    } else {
+      const response = await deleteHeart(boardId);
+      console.log(response);
+      setLiked(false);
+    }
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <>
       <Header />
       <Container>
-        {/* {items &&
+        {items &&
           items.map((item) => (
-            <TinderCard className="swipe" key={item.name}>
+            <TinderCard className="swipe" key={item.id}>
               <div
-                style={{ backgroundImage: `url(${item.url})` }}
+                style={{ backgroundImage: `url(${item.imgUrl})` }}
                 className="card"
               >
-                <h3>{item.name}</h3>
+                <div className="description">
+                  <h2>{item.title}</h2>
+                  <h3>{item.content}</h3>
+                  <h4>{item.userId}</h4>
+                </div>
+                <div
+                  className="like-btn"
+                  onClick={() => {
+                    handleLike(item.id);
+                  }}
+                >
+                  {!liked ? (
+                    <FavoriteBorderIcon fontSize="large" />
+                  ) : (
+                    <FavoriteIcon fontSize="large" color="error" />
+                  )}
+                </div>
               </div>
             </TinderCard>
-          ))} */}
-
-        <TinderCard className="swipe">
-          <div
-            style={{
-              backgroundImage: `url("https://image.msscdn.net/images/goods_img/20190503/1034480/1034480_5_125.jpg")`,
-            }}
-            className="card"
-          >
-            <h3>가방</h3>
-          </div>
-        </TinderCard>
-        <TinderCard className="swipe">
-          <div
-            style={{
-              backgroundImage: `url("https://images.christiantoday.co.kr/data/images/full/343352/2021-10.jpg?w=654")`,
-            }}
-            className="card"
-          >
-            <h3>책</h3>
-          </div>
-        </TinderCard>
-        <TinderCard className="swipe">
-          <div
-            style={{
-              backgroundImage: `url("https://avatars.githubusercontent.com/u/65757344?v=4")`,
-            }}
-            className="card"
-          >
-            <h3>김건호</h3>
-          </div>
-        </TinderCard>
-        <TinderCard className="swipe">
-          <div
-            style={{
-              backgroundImage: `url("https://cdn.top-rider.com/news/photo/202106/61158_130059_722.jpg")`,
-            }}
-            className="card"
-          >
-            <h3>스포츠카</h3>
-          </div>
-        </TinderCard>
+          ))}
       </Container>
       <Footer />
     </>

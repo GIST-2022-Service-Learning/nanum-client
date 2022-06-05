@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 const Container = styled.div`
   position: absolute;
   width: 100vw;
-  height: calc(100% - 150px);
+  height: calc(100% - 30px);
   margin: auto;
   align-items: center;
   justify-content: center;

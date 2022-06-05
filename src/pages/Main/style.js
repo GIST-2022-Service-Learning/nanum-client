@@ -4,7 +4,7 @@ const Container = styled.div`
   .swipe {
     position: absolute;
     width: 100vw;
-    height: calc(100% - 150px);
+    height: calc(100% - 30px);
     display: flex;
     .card {
       position: relative;
@@ -25,10 +25,18 @@ const Container = styled.div`
       background-position: center;
       box-shadow: 0px 3px 25px 18px rgba(0, 0, 0, 0.05);
 
-      > h3 {
+      .description {
         position: absolute;
         bottom: 10px;
-        color: white;
+      }
+      .like-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

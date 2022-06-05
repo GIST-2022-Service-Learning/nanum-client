@@ -4,7 +4,9 @@ import Main from "../pages/Main";
 import ChatScreen from "../pages/Chat/ChatScreen";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
+import LikeList from "../pages/LikeList";
 import Upload from "../pages/Upload";
+import UploadList from "../pages/UploadList";
 
 const RootRouter = () => {
   return (
@@ -13,7 +15,9 @@ const RootRouter = () => {
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/likelist" element={<LikeList />} />
         <Route path="/upload" element={<Upload />} />
+        <Route path="/uploadlist" element={<UploadList />} />
         <Route path="/chat" element={<Outlet />}>
           <Route index element={<Chats />} />
           <Route path=":person" element={<ChatScreen />} />

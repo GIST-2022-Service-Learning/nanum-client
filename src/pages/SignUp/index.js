@@ -2,63 +2,90 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import logo from "../../img/nanum_logo.png";
+import {
+  createSignUpVerificationCode,
+  confirmSignUpVerificationCode,
+} from "../../api/verifyAPI";
+import { signup } from "../../api/userAPI";
 
 const SignUp = () => {
   const navigate = useNavigate();
+
   const [input, setInput] = useState({
-    email: "",
+    username: "",
     verificationCode: "",
+    nickname: "",
     password: "",
     passwordConfirm: "",
   });
-  const [errorText, setErrorText] = useState("");
 
-  const handleCreateCode = async () => {
-    const emailRegex = /@(gm.)?gist.ac.kr$/;
-    if (!emailRegex.test(input.email)) {
-      setErrorText("지스트 메일을 이용해주세요");
-      return;
-    }
-    setErrorText("");
-    console.log("ABCDEF");
-    return;
-  };
-  // console.log(input);
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "verificationCode") {
-      if (value.length > 6) {
-        return;
-      }
-      setInput({ ...input, [name]: value.toUpperCase() });
-      return;
-    }
     setInput({ ...input, [name]: value });
   };
-  const handleSubmit = async (e) => {
+
+  const handleSendCode = async (e) => {
     e.preventDefault();
-    if (input.password === input.passwordConfirm) {
-      const response = await postSignUp(input);
-      const status = response.status;
-      console.log(status);
-      if (status < 400) {
-        console.log(status);
-        navigate("/");
-      } else {
-        setErrorText("인증코드를 정확히 입력해주세요.");
-        return;
-      }
+    const emailRegex = /@(gm.)?gist.ac.kr$/;
+    if (!emailRegex.test(input.username)) {
+      setMessage("지스트 메일을 이용해주세요");
+      return;
+    }
+
+    const response = await createSignUpVerificationCode({
+      username: input.username,
+    });
+    const status = response.status;
+
+    if (status < 400) {
+      setMessage("인증번호가 전송되었습니다.");
     } else {
-      setErrorText("비밀번호가 일치하지 않습니다.");
+      console.log(response);
+      console.log(status);
     }
   };
-  const postSignUp = (input) => {
-    let result = 400;
-    if (input.verificationCode === "ABCDEF") {
-      result = 200;
+
+  const handleVerify = async (e) => {
+    e.preventDefault();
+
+    const response = await confirmSignUpVerificationCode({
+      username: input.username,
+      verificationCode: input.verificationCode,
+    });
+
+    const status = response.status;
+
+    if (status < 400) {
+      setMessage("인증되었습니다.");
+    } else {
+      console.log(response);
+      console.log(status);
     }
-    const res = { status: result, data: "fake-body" };
-    return res;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (input.password === input.passwordConfirm) {
+      const response = await signup({
+        username: input.username,
+        verificationCode: input.verificationCode,
+        nickname: input.nickname,
+        password: input.password,
+      });
+      const status = response.status;
+
+      if (status < 400) {
+        navigate("/signin");
+      } else {
+        console.log(response);
+        console.log(status);
+      }
+    } else {
+      setMessage("비밀번호가 일치하지 않습니다.");
+    }
   };
 
   return (
@@ -68,24 +95,39 @@ const SignUp = () => {
         <div className="wrapper-in-form">
           <div className="input-wrapper email-input">
             <input
-              name="email"
-              type="email"
+              name="username"
+              type="username"
               placeholder="지스트 이메일"
               onChange={handleChange}
             ></input>
             <button
               className="verification-btn"
               type="button"
-              onClick={handleCreateCode}
+              onClick={handleSendCode}
+            >
+              전송
+            </button>
+          </div>
+          <div className="input-wrapper email-input">
+            <input
+              name="verificationCode"
+              value={input.verificationCode}
+              placeholder="인증코드"
+              onChange={handleChange}
+            ></input>
+            <button
+              className="verification-btn"
+              type="button"
+              onClick={handleVerify}
             >
               인증
             </button>
           </div>
           <div className="input-wrapper verification-code-input">
             <input
-              name="verificationCode"
-              value={input.verificationCode}
-              placeholder="인증번호"
+              name="nickname"
+              value={input.nickname}
+              placeholder="닉네임"
               onChange={handleChange}
             ></input>
           </div>
@@ -117,7 +159,7 @@ const SignUp = () => {
             </span>
           </div>
           <div>
-            <span className="error-msg">{errorText}</span>
+            <span className="error-msg">{message}</span>
           </div>
         </div>
       </form>

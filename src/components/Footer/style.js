@@ -9,7 +9,7 @@ const Container = styled.div`
   border-top: 1px solid #f9f8f8;
 
   box-shadow: 0px -26px 35px rgba(0, 0, 0, 0.04);
-
+  background-color: white;
   .menu {
     height: 100%;
     display: flex;

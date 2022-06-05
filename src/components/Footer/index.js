@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <Container className="footer">
       <div className="menu">
-        <Link to="/chat">
+        <Link to="/likelist">
           <IconButton>
             <FavoriteIcon />
           </IconButton>

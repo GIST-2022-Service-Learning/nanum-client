@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Header from "../../components/Header";
-import { createBoard } from "../../api/itemAPI";
+import { createBoard } from "../../api/boardAPI";
 import Footer from "../../components/Footer";
 import { Container } from "./style";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import api from "../../api/baseAPI";
 
 const Upload = () => {
   const [itemInput, setItemInput] = useState({
     title: "",
     content: "",
-    file: "",
+    file: null,
   });
 
   const handleChange = (e) => {
@@ -21,17 +22,28 @@ const Upload = () => {
   };
 
   const handleFileInput = (e) => {
+    const file = e.target.files[0];
     setItemInput({
       ...itemInput,
-      file: e.target.files[0],
+      file: file,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+
+    formData.append("title", itemInput.title);
+    formData.append("content", itemInput.content);
+    formData.append("file", itemInput.file);
+
+    api.defaults.headers.common["Authorization"] = `${
+      document.cookie.split("=")[1]
+    }`;
+
     try {
-      const response = await createBoard(itemInput);
+      const response = await createBoard(formData);
       console.log(response);
       alert("등록 완료!");
     } catch (err) {
@@ -67,6 +79,7 @@ const Upload = () => {
                 id="file"
                 name="file"
                 type="file"
+                multiple
                 accept="image/jpg,impge/png,image/jpeg,image/gif"
                 onChange={handleFileInput}
               ></input>
