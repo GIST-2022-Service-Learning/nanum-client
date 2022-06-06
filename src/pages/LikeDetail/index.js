@@ -67,19 +67,24 @@ const LikeDetail = () => {
       <Container>
         <div className="item-details">
           <div
-            className="item-image"
+            className="item-image front"
             style={{ backgroundImage: `url(${item.imgUrl})` }}
           ></div>
+          <div className="item-image back">
+            <div className="item-title">
+              <h2>{item.title}</h2>
+            </div>
+            <p className="item-content">{item.content}</p>
+            <div className="item-contact">{item.userName}</div>
+          </div>
         </div>
         <div className="comment-list">
           {commentList &&
             commentList.map((comment, idx) => (
-              <>
-                <div className="comment" key={comment.id}>
-                  <Avatar className="comment-image" alt={comment.id} />
-                  <p className="comment-text"> {comment.comment} </p>
-                </div>
-              </>
+              <div className="comment" key={comment.id}>
+                <Avatar className="comment-image" alt={`${comment.id}`} />
+                <p className="comment-text"> {comment.comment} </p>
+              </div>
             ))}
         </div>
         <div className="comment-form">

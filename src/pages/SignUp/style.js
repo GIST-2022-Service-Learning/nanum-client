@@ -57,6 +57,12 @@ const Container = styled.div`
         color: aliceblue;
       }
     }
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
   }
 `;
 export { Container };

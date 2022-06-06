@@ -4,7 +4,9 @@ import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getHeartBoard } from "../../api/boardAPI";
 import api from "../../api/baseAPI";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import Item from "./Item";
 
 const LikeList = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const LikeList = () => {
       navigate("/signin");
     }
   };
+
   const [items, setItems] = useState([]);
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
@@ -20,7 +23,6 @@ const LikeList = () => {
     }`;
     const response = await getHeartBoard();
     setItems(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -32,17 +34,17 @@ const LikeList = () => {
     <>
       <Header />
       <Container>
-        {items &&
-          items.map((item) => (
-            <Link to={`/likelist/${item.boardId}`} key={item.boardId}>
-              <div
-                className="item"
-                style={{ backgroundImage: `url(${item.imgUrl})` }}
-              ></div>
-            </Link>
-          ))}
-        <div className="item none"></div>
-        <div className="item none"></div>
+        <div className="menu-name">
+          <h2>좋아요 목록</h2>
+        </div>
+        <div className="gird-container">
+          {items &&
+            items.map((item) => <Item props={item} key={item.boardId} />)}
+          <div className="item none"></div>
+          <div className="item none"></div>
+          <div className="item none"></div>
+          <div className="item none"></div>
+        </div>
       </Container>
       <Footer />
     </>

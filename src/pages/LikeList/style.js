@@ -1,30 +1,54 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow-y: auto;
-
-  position: absolute;
-  width: 100vw;
-
-  top: 75px;
-
-  padding: 0 10px;
-  box-sizing: border-box;
-  gap: 10px;
-
-  .item {
-    border: 1px solid black;
-    height: 180px;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  .menu-name {
+    position: absolute;
+    top: 100px;
+    width: 135px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
-  .none {
-    border: transparent;
-    background-color: transparent;
+  .gird-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px;
+    overflow-y: auto;
+
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    top: 160px;
+
+    padding: 0 10px;
+    box-sizing: border-box;
+    gap: 10px;
+
+    .item-wrapper {
+      position: relative;
+      height: 180px;
+
+      .item {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+        height: 180px;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      .like-btn {
+        z-index: 10;
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+      }
+      .none {
+        box-shadow: none;
+        border: transparent;
+        background-color: transparent;
+      }
+    }
   }
 `;
 

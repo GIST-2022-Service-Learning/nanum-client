@@ -6,12 +6,12 @@ export const getBoard = async () => {
 };
 
 export const getMyBoard = async () => {
-  const response = await api.get(`board/me`);
+  const response = await api.get(`boards/me`);
   return response;
 };
 
 export const getHeartBoard = async () => {
-  const response = await api.get(`board/me/heart`);
+  const response = await api.get(`boards/me/heart`);
   return response;
 };
 
@@ -22,5 +22,10 @@ export const getDetailBoard = async (boardId) => {
 
 export const createBoard = async (request) => {
   const response = await api.post(`boards`, request);
+  return response;
+};
+
+export const completeBoard = async (boardId) => {
+  const response = await api.put(`boards/${boardId}/complete`);
   return response;
 };
