@@ -4,6 +4,7 @@ import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getMyBoard } from "../../api/boardAPI";
 import api from "../../api/baseAPI";
+import { Link } from "react-router-dom";
 
 const UploadList = () => {
   const [items, setItems] = useState([]);
@@ -27,11 +28,12 @@ const UploadList = () => {
       <Container>
         {items &&
           items.map((item) => (
-            <div
-              className="item"
-              key={item.id}
-              style={{ backgroundImage: `url(${item.imgUrl})` }}
-            ></div>
+            <Link key={item.id} to={`/uploadlist/${item.id}`}>
+              <div
+                className="item"
+                style={{ backgroundImage: `url(${item.imgUrl})` }}
+              ></div>
+            </Link>
           ))}
         <div className="item none"></div>
         <div className="item none"></div>

@@ -7,6 +7,8 @@ import SignIn from "../pages/SignIn";
 import LikeList from "../pages/LikeList";
 import Upload from "../pages/Upload";
 import UploadList from "../pages/UploadList";
+import LikeDetail from "../pages/LikeDetail";
+import UploadDetail from "../pages/UploadDetail";
 
 const RootRouter = () => {
   return (
@@ -15,9 +17,16 @@ const RootRouter = () => {
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/likelist" element={<LikeList />} />
+        <Route path="/likelist" element={<Outlet />}>
+          <Route index element={<LikeList />} />
+          <Route path=":param" element={<LikeDetail />} />
+        </Route>
         <Route path="/upload" element={<Upload />} />
-        <Route path="/uploadlist" element={<UploadList />} />
+        <Route path="/uploadlist" element={<Outlet />}>
+          <Route index element={<UploadList />} />
+          <Route path=":param" element={<UploadDetail />} />
+        </Route>
+
         <Route path="/chat" element={<Outlet />}>
           <Route index element={<Chats />} />
           <Route path=":person" element={<ChatScreen />} />

@@ -18,6 +18,9 @@ const Container = styled.div`
     border: 1px solid black;
     height: 180px;
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
   .none {
     border: transparent;

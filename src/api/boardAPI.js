@@ -15,6 +15,11 @@ export const getHeartBoard = async () => {
   return response;
 };
 
+export const getDetailBoard = async (boardId) => {
+  const response = await api.get(`boards/${boardId}/details`);
+  return response;
+};
+
 export const createBoard = async (request) => {
   const response = await api.post(`boards`, request);
   return response;

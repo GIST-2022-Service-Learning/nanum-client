@@ -24,6 +24,7 @@ const SignIn = () => {
     const status = response.status;
     if (status < 400) {
       navigate("/");
+      console.log(response);
       document.cookie = `token=${response.headers.authorization}`;
     } else {
       console.log(response);
