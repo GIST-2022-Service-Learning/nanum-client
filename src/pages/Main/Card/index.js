@@ -33,6 +33,9 @@ const Card = ({ props }) => {
           onClick={() => {
             handleLike(item.id);
           }}
+          onTouchEnd={() => {
+            handleLike(item.id);
+          }}
         >
           {!liked ? (
             <FavoriteBorderIcon fontSize="large" />

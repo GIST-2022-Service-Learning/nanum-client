@@ -6,6 +6,7 @@ import { getDetailBoard } from "../../api/boardAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import { getComment, postComment } from "../../api/commentAPI";
 import api from "../../api/baseAPI";
+import { Avatar } from "@mui/material";
 
 const LikeDetail = () => {
   const navigate = useNavigate();
@@ -73,19 +74,25 @@ const LikeDetail = () => {
         <div className="comment-list">
           {commentList &&
             commentList.map((comment, idx) => (
-              <div className="comment" key={comment.id}>
-                {idx + 1}: {comment.comment}
-              </div>
+              <>
+                <div className="comment" key={comment.id}>
+                  <Avatar className="comment-image" alt={comment.id} />
+                  <p className="comment-text"> {comment.comment} </p>
+                </div>
+              </>
             ))}
         </div>
         <div className="comment-form">
           <form onSubmit={handleSubmit}>
-            <textarea
-              name="comment"
-              value={input.comment}
-              onChange={handleChange}
-            ></textarea>
-            <button>입력</button>
+            <div className="wrapper-in-form">
+              <textarea
+                className="comment-input"
+                name="comment"
+                value={input.comment}
+                onChange={handleChange}
+              ></textarea>
+              <button className="comment-input-btn">입력</button>
+            </div>
           </form>
         </div>
       </Container>

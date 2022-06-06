@@ -2,7 +2,7 @@ import { Container } from "./style";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
-import ForumIcon from "@mui/icons-material/Forum";
+import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -19,9 +19,9 @@ const Footer = () => {
             <DownloadForOfflineIcon />
           </IconButton>
         </Link>
-        <Link to="/chat">
+        <Link to="/uploadlist">
           <IconButton>
-            <ForumIcon />
+            <PersonIcon className="header__icon" fontSize="large" />
           </IconButton>
         </Link>
       </div>
