@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { createBoard } from "../../api/boardAPI";
 import Footer from "../../components/Footer";
 import { Container } from "./style";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import api from "../../api/baseAPI";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
+  const navigate = useNavigate();
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
+
   const [itemInput, setItemInput] = useState({
     title: "",
     content: "",
@@ -50,6 +59,10 @@ const Upload = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    auth();
+  }, []);
 
   return (
     <>

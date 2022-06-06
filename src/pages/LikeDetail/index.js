@@ -3,18 +3,24 @@ import Footer from "../../components/Footer";
 import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getDetailBoard } from "../../api/boardAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getComment, postComment } from "../../api/commentAPI";
 import api from "../../api/baseAPI";
 
 const LikeDetail = () => {
+  const navigate = useNavigate();
   const { param } = useParams();
-
   const [item, setItem] = useState({});
   const [commentList, setCommentList] = useState([]);
   const [input, setInput] = useState({
     comment: "",
   });
+
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,12 +45,10 @@ const LikeDetail = () => {
       console.log(err);
     }
   };
-
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
     }`;
-
     const response = await getDetailBoard(param);
     setItem(response.data);
     const comments = await getComment(param);
@@ -52,6 +56,7 @@ const LikeDetail = () => {
   };
 
   useEffect(() => {
+    auth();
     fetch();
   }, []);
 
