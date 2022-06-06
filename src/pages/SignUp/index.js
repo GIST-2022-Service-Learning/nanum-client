@@ -7,6 +7,7 @@ import {
   confirmSignUpVerificationCode,
 } from "../../api/verifyAPI";
 import { signup } from "../../api/userAPI";
+import { Box, CircularProgress } from "@mui/material";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const SignUp = () => {
     password: "",
     passwordConfirm: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const [message, setMessage] = useState("");
 
@@ -28,6 +30,7 @@ const SignUp = () => {
 
   const handleSendCode = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const emailRegex = /@(gm.)?gist.ac.kr$/;
     if (!emailRegex.test(input.username)) {
       setMessage("지스트 메일을 이용해주세요");
@@ -40,6 +43,8 @@ const SignUp = () => {
     const status = response.status;
 
     if (status < 400) {
+      setLoading(false);
+
       setMessage("인증번호가 전송되었습니다.");
     } else {
       console.log(response);
@@ -156,6 +161,14 @@ const SignUp = () => {
               이미 계정이 있으신가요? <Link to="/signin">로그인</Link>
             </span>
           </div>
+          {loading && (
+            <div className="loading-spinner">
+              <Box sx={{ display: "flex" }}>
+                <CircularProgress />
+              </Box>
+              <div>잠시만 기다려주세요...</div>
+            </div>
+          )}
           <div>
             <span className="error-msg">{message}</span>
           </div>

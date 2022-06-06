@@ -5,7 +5,6 @@ import Footer from "../../components/Footer";
 import { Container } from "./style";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import api from "../../api/baseAPI";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
@@ -55,6 +54,7 @@ const Upload = () => {
       const response = await createBoard(formData);
       console.log(response);
       alert("등록 완료!");
+      navigate("/uploadlist");
     } catch (err) {
       console.log(err);
     }
@@ -81,7 +81,7 @@ const Upload = () => {
               <textarea
                 name="content"
                 onChange={handleChange}
-                placeholder="설명"
+                placeholder="설명:&#13;&#10;나눔 시간:&#13;&#10;나눔 장소: "
               />
             </div>
             <div className="input-wrapper file-input">

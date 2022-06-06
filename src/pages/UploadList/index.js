@@ -32,17 +32,24 @@ const UploadList = () => {
     <>
       <Header />
       <Container>
-        {items &&
-          items.map((item) => (
-            <Link key={item.id} to={`/uploadlist/${item.id}`}>
-              <div
-                className="item"
-                style={{ backgroundImage: `url(${item.imgUrl})` }}
-              ></div>
-            </Link>
-          ))}
-        <div className="item none"></div>
-        <div className="item none"></div>
+        <div className="menu-name">
+          <h2>나의 나눔 목록</h2>
+        </div>
+        <div className="gird-container">
+          {items &&
+            items.map((item) => (
+              <Link key={item.id} to={`/uploadlist/${item.id}`}>
+                <div
+                  className="item"
+                  style={{ backgroundImage: `url(${item.imgUrl})` }}
+                ></div>
+              </Link>
+            ))}
+          <div className="item none"></div>
+          <div className="item none"></div>
+          <div className="item none"></div>
+          <div className="item none"></div>
+        </div>
       </Container>
       <Footer />
     </>
