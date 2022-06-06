@@ -37,7 +37,9 @@ const Card = ({ props }) => {
             handleLike(item.id);
           }}
         >
-          {!liked ? (
+          {item.id === 9999 ? (
+            <></>
+          ) : !liked ? (
             <FavoriteBorderIcon fontSize="large" />
           ) : (
             <FavoriteIcon fontSize="large" color="error" />
