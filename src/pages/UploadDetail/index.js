@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getDetailBoard } from "../../api/boardAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getComment } from "../../api/commentAPI";
 import api from "../../api/baseAPI";
 
@@ -13,6 +13,12 @@ const UploadDetail = () => {
   const [item, setItem] = useState({});
   const [commentList, setCommentList] = useState([]);
 
+  const navigate = useNavigate();
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
@@ -26,6 +32,7 @@ const UploadDetail = () => {
   };
 
   useEffect(() => {
+    auth();
     fetch();
   }, []);
 

@@ -26,7 +26,6 @@ const RootRouter = () => {
           <Route index element={<UploadList />} />
           <Route path=":param" element={<UploadDetail />} />
         </Route>
-
         <Route path="/chat" element={<Outlet />}>
           <Route index element={<Chats />} />
           <Route path=":person" element={<ChatScreen />} />

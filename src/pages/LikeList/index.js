@@ -4,21 +4,27 @@ import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getHeartBoard } from "../../api/boardAPI";
 import api from "../../api/baseAPI";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LikeList = () => {
+  const navigate = useNavigate();
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
   const [items, setItems] = useState([]);
-
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
     }`;
-
     const response = await getHeartBoard();
     setItems(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
+    auth();
     fetch();
   }, []);
 

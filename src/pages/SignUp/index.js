@@ -49,19 +49,17 @@ const SignUp = () => {
 
   const handleVerify = async (e) => {
     e.preventDefault();
-
-    const response = await confirmSignUpVerificationCode({
-      username: input.username,
-      verificationCode: input.verificationCode,
-    });
-
-    const status = response.status;
-
-    if (status < 400) {
-      setMessage("인증되었습니다.");
-    } else {
-      console.log(response);
-      console.log(status);
+    try {
+      const response = await confirmSignUpVerificationCode({
+        username: input.username,
+        verificationCode: input.verificationCode,
+      });
+      const status = response.status;
+      if (status < 400) {
+        setMessage("인증되었습니다.");
+      }
+    } catch {
+      setMessage("인증번호를 정확히 입력해주세요.");
     }
   };
 

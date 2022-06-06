@@ -5,22 +5,29 @@ import { useEffect, useState } from "react";
 import { getBoard } from "../../api/boardAPI";
 import api from "../../api/baseAPI";
 import Card from "./Card";
+import { useNavigate } from "react-router-dom";
+import SignIn from "../SignIn";
 
 const Main = () => {
   const [items, setItems] = useState([]);
-
+  const navigate = useNavigate();
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
     }`;
     console.log(document.cookie.split("=")[1]);
-
     const response = await getBoard();
     console.log(response.data);
     setItems(response.data);
   };
 
   useEffect(() => {
+    auth();
     fetch();
   }, []);
 

@@ -19,15 +19,15 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await signin(input);
-    const status = response.status;
-    if (status < 400) {
-      navigate("/");
-      console.log(response);
-      document.cookie = `token=${response.headers.authorization}`;
-    } else {
-      console.log(response);
+    try {
+      const response = await signin(input);
+      const status = response.status;
+      if (status < 400) {
+        navigate("/");
+        console.log(response);
+        document.cookie = `token=${response.headers.authorization}`;
+      }
+    } catch {
       setErrorText("비밀번호가 일치하지 않습니다.");
       return;
     }

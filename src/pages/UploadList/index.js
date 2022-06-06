@@ -4,11 +4,16 @@ import { Container } from "./style";
 import { useEffect, useState } from "react";
 import { getMyBoard } from "../../api/boardAPI";
 import api from "../../api/baseAPI";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UploadList = () => {
   const [items, setItems] = useState([]);
-
+  const navigate = useNavigate();
+  const auth = () => {
+    if (document.cookie.split("=")[1] === undefined) {
+      navigate("/signin");
+    }
+  };
   const fetch = async () => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
@@ -19,6 +24,7 @@ const UploadList = () => {
   };
 
   useEffect(() => {
+    auth();
     fetch();
   }, []);
 
