@@ -52,6 +52,7 @@ const LikeDetail = () => {
     }`;
     const response = await getDetailBoard(param);
     setItem(response.data);
+    console.log(response.data);
     const comments = await getComment(param);
     setCommentList(comments.data);
   };

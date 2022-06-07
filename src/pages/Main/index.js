@@ -28,6 +28,7 @@ const Main = () => {
       document.cookie.split("=")[1]
     }`;
     const response = await getBoard();
+    console.log(response.data);
     setItems(response.data);
   };
 

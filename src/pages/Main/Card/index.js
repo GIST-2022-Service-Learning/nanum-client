@@ -1,25 +1,38 @@
 import TinderCard from "react-tinder-card";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createHeart } from "../../../api/heartAPI";
 import api from "../../../api/baseAPI";
-import { height } from "@mui/system";
+import { getComment } from "../../../api/commentAPI";
 
 const Card = ({ props }) => {
   const item = props;
 
   const [liked, setLiked] = useState(false);
-
+  const [id, setId] = useState(0);
+  const [commentCount, setCommentCount] = useState(0);
   const handleLike = async (boardId) => {
     api.defaults.headers.common["Authorization"] = `${
       document.cookie.split("=")[1]
     }`;
 
     const response = await createHeart(boardId);
-    console.log(response.data);
+    console.log(response);
     setLiked(response.data);
   };
+
+  const fetch = async (boardId) => {
+    const response = await getComment(boardId);
+    setCommentCount(response.data.length);
+  };
+
+  useEffect(() => {
+    setId(item.id);
+    if (id !== 0) {
+      fetch(id);
+    }
+  }, [id]);
 
   return (
     <TinderCard className="swipe">
@@ -31,8 +44,14 @@ const Card = ({ props }) => {
         <div className="item-info">
           <div className="description">
             <h2>{item.title}</h2>
+            <br />
             <h3>{item.content}</h3>
-            <h4>{item.userId}</h4>
+          </div>
+        </div>
+        <div className="sub-info">
+          <div className="comment-count">
+            <div>{commentCount}</div>
+            <div>Comments</div>
           </div>
           <div
             className="like-btn"
@@ -46,9 +65,12 @@ const Card = ({ props }) => {
             {item.id === 9999 ? (
               <></>
             ) : !liked ? (
-              <FavoriteBorderIcon fontSize="large" />
+              <FavoriteBorderIcon
+                sx={{ fontSize: 40 }}
+                style={{ color: "aliceblue" }}
+              />
             ) : (
-              <FavoriteIcon fontSize="large" color="error" />
+              <FavoriteIcon color="error" sx={{ fontSize: 40 }} />
             )}
           </div>
         </div>
