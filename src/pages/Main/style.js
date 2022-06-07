@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { height } from "@mui/system";
 
 const Container = styled.div`
   .swipe {
@@ -25,9 +26,16 @@ const Container = styled.div`
       background-position: center;
       box-shadow: 0px 3px 25px 18px rgba(0, 0, 0, 0.05);
 
-      .description {
-        position: absolute;
-        bottom: 10px;
+      .item-image {
+        height: 300px;
+        border-radius: 20px 20px 0px 0px;
+        background-size: cover;
+        background-position: center;
+      }
+      .item-info {
+        border-radius: 0px 0px 20px 20px;
+        height: 200px;
+        background-color: #ffffff;
       }
       .like-btn {
         position: absolute;

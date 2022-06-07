@@ -4,6 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
 import { createHeart } from "../../../api/heartAPI";
 import api from "../../../api/baseAPI";
+import { height } from "@mui/system";
 
 const Card = ({ props }) => {
   const item = props;
@@ -22,28 +23,34 @@ const Card = ({ props }) => {
 
   return (
     <TinderCard className="swipe">
-      <div style={{ backgroundImage: `url(${item.imgUrl})` }} className="card">
-        <div className="description">
-          <h2>{item.title}</h2>
-          <h3>{item.content}</h3>
-          <h4>{item.userId}</h4>
-        </div>
+      <div className="card">
         <div
-          className="like-btn"
-          onClick={() => {
-            handleLike(item.id);
-          }}
-          onTouchEnd={() => {
-            handleLike(item.id);
-          }}
-        >
-          {item.id === 9999 ? (
-            <></>
-          ) : !liked ? (
-            <FavoriteBorderIcon fontSize="large" />
-          ) : (
-            <FavoriteIcon fontSize="large" color="error" />
-          )}
+          style={{ backgroundImage: `url(${item.imgUrl})` }}
+          className="item-image"
+        ></div>
+        <div className="item-info">
+          <div className="description">
+            <h2>{item.title}</h2>
+            <h3>{item.content}</h3>
+            <h4>{item.userId}</h4>
+          </div>
+          <div
+            className="like-btn"
+            onClick={() => {
+              handleLike(item.id);
+            }}
+            onTouchEnd={() => {
+              handleLike(item.id);
+            }}
+          >
+            {item.id === 9999 ? (
+              <></>
+            ) : !liked ? (
+              <FavoriteBorderIcon fontSize="large" />
+            ) : (
+              <FavoriteIcon fontSize="large" color="error" />
+            )}
+          </div>
         </div>
       </div>
     </TinderCard>
